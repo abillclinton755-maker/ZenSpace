@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ZenSpace — Your personal mindfulness and meditation companion. Track sessions, journal reflections, and build healthy habits.">
+    <title>ZenSpace | Premium Mindfulness & Wellness</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="dark-theme">
+    <div class="background-blob blob-1"></div>
+    <div class="background-blob blob-2"></div>
+    <div class="background-blob blob-3"></div>
+
+    <!-- Onboarding Overlay -->
+    <div id="onboarding-overlay" class="overlay hidden">
+        <div class="onboarding-content glass-card">
+            <div class="onboarding-slides">
+                <div class="onboarding-slide active" data-slide="0">
+                    <div class="onboarding-icon"><i class="fa-solid fa-spa"></i></div>
+                    <h2>Welcome to ZenSpace</h2>
+                    <p>Your personal mindfulness companion for meditation, breathing exercises, and mental wellness tracking.</p>
+                </div>
+                <div class="onboarding-slide" data-slide="1">
+                    <div class="onboarding-icon"><i class="fa-solid fa-brain"></i></div>
+                    <h2>Track Your Journey</h2>
+                    <p>Log your mood, keep a journal, earn badges, and visualize your progress with beautiful charts.</p>
+                </div>
+                <div class="onboarding-slide" data-slide="2">
+                    <div class="onboarding-icon"><i class="fa-solid fa-wind"></i></div>
+                    <h2>Breathe & Focus</h2>
+                    <p>Choose from guided breathing techniques or use the Pomodoro timer to boost your productivity.</p>
+                </div>
+            </div>
+            <div class="onboarding-dots">
+                <span class="dot active" data-dot="0"></span>
+                <span class="dot" data-dot="1"></span>
+                <span class="dot" data-dot="2"></span>
+            </div>
+            <div class="onboarding-actions">
+                <button id="onboarding-skip" class="text-btn">Skip</button>
+                <button id="onboarding-next" class="primary-btn small">Next</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Modal -->
+    <div id="custom-modal" class="overlay hidden">
+        <div class="modal-content glass-card">
+            <div id="modal-icon" class="modal-icon"><i class="fa-solid fa-check-circle"></i></div>
+            <h2 id="modal-title">Session Complete</h2>
+            <p id="modal-message">Great job! Namaste 🙏</p>
+            <div id="modal-extra" class="modal-extra"></div>
+            <div class="modal-actions">
+                <button id="modal-confirm" class="primary-btn small">OK</button>
+                <button id="modal-cancel" class="text-btn hidden">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="logo"><i class="fa-solid fa-leaf"></i> ZenSpace</div>
+        <div class="header-controls">
+            <button id="theme-toggle" title="Toggle Theme"><i class="fa-solid fa-moon"></i></button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+
+        <!-- ===== HOME VIEW ===== -->
+        <section id="view-home" class="view active" data-view="home">
+            <h1 id="greeting">Good Morning</h1>
+            <p class="subtitle" id="subtitle-date">Wednesday, April 2</p>
+
+            <div class="cards-grid">
+                <div class="glass-card stat-card">
+                    <i class="fa-solid fa-fire"></i>
+                    <div class="stat-info">
+                        <h3>Streak</h3>
+                        <p id="streak-count">0 Days</p>
+                    </div>
+                </div>
+                <div class="glass-card stat-card">
+                    <i class="fa-solid fa-clock"></i>
+                    <div class="stat-info">
+                        <h3>Total Time</h3>
+                        <p id="total-time">0 Mins</p>
+                    </div>
+                </div>
+                <div class="glass-card stat-card">
+                    <i class="fa-solid fa-layer-group"></i>
+                    <div class="stat-info">
+                        <h3>Sessions</h3>
+                        <p id="session-total">0</p>
+                    </div>
+                </div>
+                <div class="glass-card stat-card">
+                    <i class="fa-solid fa-trophy"></i>
+                    <div class="stat-info">
+                        <h3>Badges</h3>
+                        <p id="badge-count">0</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Breathing Technique Selector -->
+            <div class="glass-card timer-setup">
+                <h2>Start a Session</h2>
+                <label class="field-label">Breathing Technique</label>
+                <div class="technique-selector">
+                    <button class="tech-btn active" data-technique="relaxed" title="Simple guided breathing">Relaxed</button>
+                    <button class="tech-btn" data-technique="478" title="4-7-8 for sleep & anxiety">4-7-8</button>
+                    <button class="tech-btn" data-technique="box" title="Box breathing for focus">Box</button>
+                    <button class="tech-btn" data-technique="deep" title="Deep calm breathing">Deep Calm</button>
+                </div>
+                <label class="field-label">Duration</label>
+                <div class="time-presets">
+                    <button class="preset-btn" data-time="1">1 Min</button>
+                    <button class="preset-btn active" data-time="5">5 Min</button>
+                    <button class="preset-btn" data-time="10">10 Min</button>
+                    <button class="preset-btn" data-time="15">15 Min</button>
+                    <button class="preset-btn" data-time="custom"><i class="fa-solid fa-pen"></i></button>
+                </div>
+                <div class="custom-time-input hidden">
+                    <input type="number" id="custom-minutes" min="1" max="120" placeholder="Minutes" value="20">
+                </div>
+                <div class="session-mode-toggle">
+                    <button class="mode-btn active" data-mode="meditate"><i class="fa-solid fa-spa"></i> Meditate</button>
+                    <button class="mode-btn" data-mode="focus"><i class="fa-solid fa-bullseye"></i> Focus</button>
+                </div>
+                <div id="focus-settings" class="focus-settings hidden">
+                    <label class="field-label">Focus / Break (mins)</label>
+                    <div class="focus-inputs">
+                        <input type="number" id="focus-work" min="1" max="90" value="25" title="Work duration">
+                        <span>/</span>
+                        <input type="number" id="focus-break" min="1" max="30" value="5" title="Break duration">
+                    </div>
+                </div>
+                <button id="start-btn" class="primary-btn">Begin Journey</button>
+            </div>
+
+            <div class="glass-card quote-card">
+                <i class="fa-solid fa-quote-left quote-icon"></i>
+                <p id="daily-quote">"Peace comes from within. Do not seek it without."</p>
+            </div>
+        </section>
+
+        <!-- ===== ACTIVE SESSION VIEW ===== -->
+        <section id="view-session" class="view" data-view="session">
+            <div class="visualizer-container">
+                <div class="breathing-orb">
+                    <div class="orb-core"></div>
+                    <div class="orb-glow"></div>
+                </div>
+                <p id="breathing-instruction">Get ready...</p>
+            </div>
+            <div class="timer-display">
+                <svg class="progress-ring" width="220" height="220">
+                    <circle class="progress-ring-circle-bg" stroke-width="6" fill="transparent" r="100" cx="110" cy="110"/>
+                    <circle id="progress-ring-circle" class="progress-ring-circle" stroke-width="6" fill="transparent" r="100" cx="110" cy="110"/>
+                </svg>
+                <div class="time-left" id="time-left">05:00</div>
+            </div>
+            <div id="focus-cycle-info" class="focus-cycle-info hidden"><span id="focus-cycle-text">Focus 1/4</span></div>
+            <div class="session-controls">
+                <button id="pause-btn" class="control-btn" title="Pause/Resume"><i class="fa-solid fa-pause"></i></button>
+                <button id="end-btn" class="control-btn danger" title="End Session"><i class="fa-solid fa-stop"></i></button>
+            </div>
+            <div class="audio-controls">
+                <i class="fa-solid fa-volume-high"></i>
+                <input type="range" id="volume-slider" min="0" max="1" step="0.05" value="0.5">
+            </div>
+        </section>
+
+        <!-- ===== JOURNAL VIEW ===== -->
+        <section id="view-journal" class="view" data-view="journal">
+            <h1>Reflection Journal</h1>
+            <p class="subtitle">Write down your thoughts and reflections.</p>
+            <div class="glass-card journal-compose">
+                <textarea id="journal-input" placeholder="What's on your mind today?" rows="4"></textarea>
+                <button id="journal-save" class="primary-btn small"><i class="fa-solid fa-plus"></i> Add Entry</button>
+            </div>
+            <div id="journal-list" class="journal-list">
+                <!-- Entries rendered by JS -->
+            </div>
+        </section>
+
+        <!-- ===== STATS VIEW ===== -->
+        <section id="view-stats" class="view" data-view="stats">
+            <h1>Your Progress</h1>
+            <p class="subtitle">Weekly meditation minutes</p>
+            <div class="glass-card chart-container">
+                <canvas id="stats-chart" width="700" height="300"></canvas>
+            </div>
+            <div class="glass-card">
+                <h3 style="margin-bottom:16px;">Session History</h3>
+                <div id="history-list" class="history-list">
+                    <!-- Rendered by JS -->
+                </div>
+                <button id="export-csv" class="primary-btn small" style="margin-top:16px;"><i class="fa-solid fa-download"></i> Export CSV</button>
+            </div>
+        </section>
+
+        <!-- ===== PROFILE / ACHIEVEMENTS VIEW ===== -->
+        <section id="view-profile" class="view" data-view="profile">
+            <h1>Achievements</h1>
+            <p class="subtitle">Unlock badges by building your practice.</p>
+            <div class="badges-grid" id="badges-grid">
+                <!-- Rendered by JS -->
+            </div>
+            <div class="glass-card" style="margin-top:24px;text-align:center;">
+                <h3 style="margin-bottom:12px;">Data Management</h3>
+                <button id="reset-data" class="text-btn danger-text"><i class="fa-solid fa-trash"></i> Reset All Data</button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <button class="nav-btn active" data-target="home"><i class="fa-solid fa-house"></i><span>Home</span></button>
+        <button class="nav-btn" data-target="journal"><i class="fa-solid fa-book"></i><span>Journal</span></button>
+        <button class="nav-btn" data-target="stats"><i class="fa-solid fa-chart-simple"></i><span>Stats</span></button>
+        <button class="nav-btn" data-target="profile"><i class="fa-solid fa-award"></i><span>Profile</span></button>
+    </nav>
+
+    <audio id="music" src="music.mp3.mp3" preload="auto" loop></audio>
+    <audio id="alarm" src="music.mp3.mp3" preload="auto"></audio>
+
+    <script src="script.js"></script>
+</body>
+</html>
